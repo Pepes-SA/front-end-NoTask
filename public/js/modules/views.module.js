@@ -1,25 +1,21 @@
-
-import notesModule from './notes.module.js'
+import notesModule from "./notes.module.js";
 
 class viewGeneratorModule {
+  async generateNotes() {}
 
-
-    async generateNotes(){
-
-    }
-
-    async viewAllNotes(){
-        let notes = await  notesModule.getNotes();
-        let view = document.getElementById('ContainerNotes');
-        view.innerhtml = ""
-        for (let n = 0; n < notes.length; n++) {
-            
-          view.innerhtml += `        
+  async viewAllNotes() {
+    let notes = await notesModule.getNotes();
+    let view = document.getElementById("ContainerNotes");
+    view.innerhtml = "";
+    console.log("entro aki");
+    console.log(notes);
+    for (let n = 0; n < notes.length; n++) {
+      view.innerhtml += `        
             <div class="col-3 mb-2 p-3">
             <div class="cardM mb-2 ms-2">
               <div class="date-time-container">
-                <time class="date-time" datetime="${n.CreationDate.slice(-4)}">
-                  <span>${n.CreationDate.slice(-4)}</span>
+                <time class="date-time" datetime="${n.creationDate}">
+                  <span>${n.creationDate}</span>
                   <span class="separator"></span>
                   <span>Oct 10</span>
                 </time>
@@ -42,11 +38,8 @@ class viewGeneratorModule {
               </div>
             </div>
         </div>`;
-         
-        }
-
     }
-
+  }
 }
 
 export default new viewGeneratorModule();

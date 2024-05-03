@@ -1,7 +1,6 @@
-import notesModule from './modules/notes.module.js'
-import viewNotesModule from './modules/views.module.js'
+import viewNotesModule from "./modules/views.module.js";
 
-viewNotesModule.viewAllNotes()
+viewNotesModule.viewAllNotes();
 
 const htmlContent = `
   <div class="toggle"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256"><path fill="#141414" d="M228 128a12 12 0 0 1-12 12h-76v76a12 12 0 0 1-24 0v-76H40a12 12 0 0 1 0-24h76V40a12 12 0 0 1 24 0v76h76a12 12 0 0 1 12 12"/></svg></div>
@@ -39,8 +38,43 @@ toggle?.addEventListener("click", () => {
   menu.classList.toggle("active");
 });
 
-document.getElementById("selectionNavItem1")?.addEventListener("click", () => {});
+document
+  .getElementById("selectionNavItem1")
+  ?.addEventListener("click", () => {});
 
-document.getElementById("selectionNavItem2")?.addEventListener("click", () => {});
-document.getElementById("selectionNavItem3")?.addEventListener("click", () => {});
-document.getElementById("selectionNavItem4")?.addEventListener("click", () => {});
+document
+  .getElementById("selectionNavItem2")
+  ?.addEventListener("click", () => {});
+document
+  .getElementById("selectionNavItem3")
+  ?.addEventListener("click", () => {});
+document
+  .getElementById("selectionNavItem4")
+  ?.addEventListener("click", () => {});
+
+document.getElementById("search").addEventListener("keyup", async () => {
+  // Obtener el valor del campo de búsqueda
+  const searchTerm = document.getElementById("search").value;
+
+  try {
+    // Enviar una solicitud HTTP a la API utilizando fetch
+    const response = await fetch(
+      `http://localhost:5028/api/Notes/${searchTerm}`
+    );
+
+    // Verificar si la solicitud fue exitosa
+    if (!response.ok) {
+      throw new Error("La solicitud no fue exitosa");
+    }
+
+    // Convertir la respuesta a formato JSON
+    const data = await response.json();
+
+    // Manejar los datos obtenidos de la API, por ejemplo, mostrarlos en la página
+    // Aquí puedes usar los datos para mostrarlos en tu interfaz de usuario o hacer cualquier otra cosa que necesites
+    console.log(data);
+  } catch (error) {
+    // Manejar cualquier error que pueda ocurrir durante la solicitud
+    console.error("Error al buscar elementos:", error.message);
+  }
+});
