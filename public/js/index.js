@@ -86,6 +86,11 @@ document.getElementById("search").addEventListener("keyup", async () => {
   await viewNotesModule.searchList(searchTerm);
 });
 
+document.getElementById("searchNotes").addEventListener("click", () => {
+  const filter = document.getElementById("filter").value;
+  notesModule.searchNotes(filter);
+});
+
 
 document.getElementById("btnSaveUpdate")?.addEventListener("click",async (event) => {
   let id = event.currentTarget.getAttribute("data-id");

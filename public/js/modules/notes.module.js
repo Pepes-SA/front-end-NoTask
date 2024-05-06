@@ -107,6 +107,44 @@ class notesModule {
       .catch((err) => console.error(err));
     return fetchResponse;
   }
+
+     //Metodo para filtrar 
+     searchNotes(filter) {
+      var url = `${urlBase}/Notes/`;
+      if (filter === 'recent') {
+          url += 'SearchByDate/Recent';
+      } else if (filter === 'old') {
+          url += 'SearchByDate/Old';
+      }
+  
+      fetch(url, { method: "GET" })
+          .then(response => response.json())
+          .then(data => {
+              console.log(data); // Imprimir la respuesta en la consola
+              this.displayNotes(data);
+          })
+          .catch(err => console.error(err));
+  }
+  
+  displayNotes(notes) {
+      var notesList = document.getElementById("notesList");
+      notesList.innerHTML = ''; // Limpiar el contenido anterior
+  
+      if (notes.length === 0) {
+          notesList.innerHTML = '<p>No se encontraron notas para el filtro especificado.</p>';
+          return;
+      }
+  
+      var html = '<ul>';
+      notes.forEach(function(note) {
+          html += '<li>Title: ' + note.title + ', Text: ' + note.text + '</li>';
+      });
+      html += '</ul>';
+      notesList.innerHTML = html;
+  }
+  
+
 }
+
 
 export default new notesModule();
