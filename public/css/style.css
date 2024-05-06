@@ -9,6 +9,7 @@ html {
 
 
 
+
 /* Inicio toggle menu */
 
 .menu{
@@ -90,7 +91,8 @@ html {
     box-sizing: border-box;
     display: flex;
     max-width: 300px;
-    background-color: rgba(255, 255, 255, 1);
+    height: 200px;
+    background-color: #fefae8;
     transition: all .15s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
@@ -128,30 +130,38 @@ html {
     flex: 1 1 0%;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
   }
   
   .infos {
     border-left: 1px solid rgba(17, 24, 39, 0.1);
     padding: 1rem;
+    overflow: hidden;   
   }
   
   .title {
     font-weight: 700;
     text-transform: uppercase;
     font-size: 18.72px;
-    color: rgba(17, 24, 39, 1);
+    color: #423606;
+  
+  }
+
+  a {
+    color: #856d0e;
   }
   
   .description {
-    overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 3;
     line-clamp: 5;
     margin-top: 0.5rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
     color: rgba(55, 65, 81, 1);
+    word-wrap: break-word;
+    overflow: hidden;
   }
   
   .action {
