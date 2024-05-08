@@ -86,7 +86,7 @@ document.getElementById("search").addEventListener("keyup", async () => {
   await viewNotesModule.searchList(searchTerm);
 });
 
-document.getElementById("searchNotes").addEventListener("click", () => {
+document.getElementById("searchNotes")?.addEventListener("click", () => {
   const filter = document.getElementById("filter").value;
   notesModule.searchNotes(filter);
 });
@@ -109,3 +109,15 @@ document.getElementById("btnSaveUpdate")?.addEventListener("click",async (event)
   viewNotesModule.viewAllNotes();
 });
 
+
+let filterby = document.getElementById("filterby")
+filterby.addEventListener("click", (e) => {
+
+if(filterby.value != 0){
+  viewNotesModule.loadNotesByFilter(filterby.value)
+}else{
+  viewNotesModule.viewAllNotes();
+}
+
+
+});

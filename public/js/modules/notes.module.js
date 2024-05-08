@@ -84,7 +84,7 @@ class notesModule {
     return fetchResponse;
   }
 
-  async updateNote(id,status) {
+  async updateNote(id) {
     let fetchResponse = "";
     await fetch(`${urlBase}/Notes/${id}`, {
       method: "PUT",
@@ -97,7 +97,7 @@ class notesModule {
         Title: document.getElementById("titleInpuntId2").value,
         Text: document.getElementById("ContentInpuntId2").value,
         IdNoteCategory: document.getElementById("categoryInpuntId2").value,
-        Status: status,
+        Status: document.getElementById("statusInpuntId2").value,
       }),
     })
       .then((response) => response.json())
@@ -120,7 +120,6 @@ class notesModule {
       fetch(url, { method: "GET" })
           .then(response => response.json())
           .then(data => {
-              console.log(data); // Imprimir la respuesta en la consola
               this.displayNotes(data);
           })
           .catch(err => console.error(err));
@@ -143,8 +142,19 @@ class notesModule {
       notesList.innerHTML = html;
   }
   
-
+  async findbyFilter(filter){
+    let fetchResponse = "";
+    await fetch(`${urlBase}/Notes/filter/${filter}`, { method: "GET" })
+      .then((response) => response.json())
+      .then((data) => {
+        fetchResponse = data;
+      })
+      .catch((err) => console.error(err));
+    return fetchResponse;
+  }
 }
 
 
 export default new notesModule();
+
+

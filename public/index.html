@@ -25,25 +25,26 @@
   <body>
     <header class="py-3 mb-4 border-bottom">
       <div class="container d-flex flex-wrap justify-content-center">
-        <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
+        <a href="index.html" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
           <svg class="bi me-2" width="40" height="32">
-            <use xlink:href="#bootstrap"></use>
+            <use xlink:href="./index.html"></use>
           </svg>
           <span class="fs-4">NoTask</span>
         </a>
-        <div class="col-12 col-lg-auto mb-3 mb-lg-0 w-75" role="search">
+        <div class="col-8 col-lg-auto mb-3 mb-lg-0 w-25" role="search">
           <input type="search" id="search" class="form-control" placeholder="Buscar..." aria-label="Buscar" />
         </div>
 
-        <h1>Search Notes by Date</h1>
-          <label for="filter">Filter by:</label>
-          <select id="filter">
-              <option value="recent">Most Recent</option>
-              <option value="old">Oldest</option>
-          </select>
-          <button id="searchNotes">Search</button>
 
-      <div id="notesList"></div>
+      <div class="col-4 ms-5" id="notesList">
+        <select  id="filterby" class="form-select" aria-label="Default select example">
+          <option selected value="0">Filtrar por</option>
+          <option value="1">Archivados</option>
+          <option value="2">Eliminados</option>
+          <option value="3">Todos</option>
+          <option value="4">FechaCreacion</option>
+        </select>        
+      </div>
       </div>
     </header>
 
@@ -68,6 +69,14 @@
                         <div class="mb-3">
                           <label for="recipient-name" class="col-form-label">Categoria:</label>
                           <select class="form-control" aria-label="Default select example" id="categoryInpuntId2">
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="recipient-name" class="col-form-label">Estado:</label>
+                          <select class="form-control" aria-label="Default select example" id="statusInpuntId2">
+                            <option value="Activo">Activa</option>
+                            <option value="Archivado">Archivado</option>
+                            <option value="Desactivado">Desactivado</option>
                           </select>
                         </div>
                         <div class="mb-3">

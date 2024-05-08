@@ -92,9 +92,9 @@ class viewGeneratorModule {
         </div>
     </div>`;
         document.querySelectorAll(".selectD").forEach((button) => {
-          button.addEventListener("click", (event) => {
+          button.addEventListener("click", async (event) => {
             let id = event.currentTarget.getAttribute("data-id");
-            this.viewCategory();
+            await this.viewCategory();
             this.viewNote(id);
           });
         });
@@ -125,10 +125,56 @@ class viewGeneratorModule {
         break;
       }
     }
+    let statusSelect = document.getElementById("statusInpuntId2");
+    for (let i = 0; i < statusSelect.options.length; i++) {
+      if (statusSelect.options[i].value === note.status) {
+        statusSelect.options[i].selected = true;
+        break;
+      }
+    }
     //setear el valor de el actualizar y por ende actualizar 
     document.getElementById("btnSaveUpdate").setAttribute("data-id", note.id);
     document.getElementById("ContentInpuntId2").value = note.text;
   }
+
+  async loadNotesByFilter(filer){
+    let notes = await notesModule.findbyFilter(filer)
+    let view = document.getElementById("ContainerNotes");
+    view.innerHTML = " ";
+    for (let n = 0; n < notes.length; n++) {
+        let date = notes[n].creationDate.split("-");
+        notes[n].creationDate = date[0];
+        let month = date[1];
+        let day = date[2].split("T")[0];
+        var nameMonth = new Date(0, month - 1, day).toLocaleString("default", { month: "short" });
+        view.innerHTML += `        
+        <div class="col-3 mb-2 p-3">
+        <div class="cardM mb-2 ms-2">
+          <div class="date-time-container">
+            <time class="date-time" datetime="${notes[n].creationDate}">
+              <span>${notes[n].creationDate}</span>
+              <span class="separator"></span>
+              <span>${nameMonth} ${day}</span>
+            </time>
+          </div>
+          <div class="content">
+            <div class="infos">
+              <a href="#">
+                <span class="title">${notes[n].title}</span>
+              </a>
+              <p class="description">
+                ${notes[n].text}
+              </p>
+            </div>
+            <a class="action w-100 selectD" data-id="${notes[n].id}" data-bs-toggle="modal" data-bs-target="#ModalNoteEdit">Ver nota</a>
+          </div>
+        </div>
+    </div>`;
+  }
+}
 }
 
 export default new viewGeneratorModule();
+
+
+
